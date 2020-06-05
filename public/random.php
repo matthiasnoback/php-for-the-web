@@ -9,7 +9,7 @@
     <h2>Nice!</h2>
 <?php } ?>
 <p>
-    <a href="/kittens.php?number=<?php echo $randomInt; ?>">
+    <a href="/pictures.php?number=<?php echo $randomInt; ?>">
         Now show me <?php echo $randomInt; ?> kittens!
     </a>
 </p>
