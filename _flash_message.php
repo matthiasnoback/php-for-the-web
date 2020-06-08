@@ -1,9 +1,9 @@
 <?php
 if (isset($_SESSION['message'])) {
     ?>
-    <p><?php
+    <div class="alert alert-primary" role="alert"><?php
         echo htmlspecialchars($_SESSION['message'], ENT_QUOTES);
-        ?></p>
+    ?></div>
     <?php
 
     unset($_SESSION['message']);

@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Kittens</title>
-</head>
-<body>
-<?php include __DIR__ . '/../_flash_message.php'; ?>
 <?php
+
+include(__DIR__ . '/../bootstrap.php');
 
 $numberOfPictures = isset($_GET['number']) ? (int)$_GET['number'] : 1;
 if ($numberOfPictures < 1) {
@@ -13,6 +8,9 @@ if ($numberOfPictures < 1) {
 }
 
 $picture = isset($_GET['picture']) ? $_GET['picture'] : 'cat.jpg';
+
+$title = 'Pictures';
+include(__DIR__ . '/../_header.php');
 
 for ($i = 1; $i <= $numberOfPictures; $i++) {
     ?>
@@ -63,5 +61,4 @@ for ($i = 1; $i <= $numberOfPictures; $i++) {
             <button type="submit">Submit</button>
         </div>
     </form>
-</body>
-</html>
+<?php include(__DIR__ . '/../_footer.php'); ?>

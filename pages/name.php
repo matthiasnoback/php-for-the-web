@@ -1,21 +1,19 @@
 <?php
-session_start();
+
+include(__DIR__ . '/../bootstrap.php');
 
 if (isset($_POST['name'])) {
     $_SESSION['name'] = $_POST['name'];
 
     $_SESSION['message'] = 'Thanks for telling us your name!';
 
-    header('Location: /random.php');
+    header('Location: /random');
     exit;
 }
+
+$title = 'Name';
+include(__DIR__ . '/../_header.php');
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Name</title>
-</head>
-<body>
 <form method="post">
     <div>
         <label for="name">
@@ -27,5 +25,4 @@ if (isset($_POST['name'])) {
         <button type="submit">Submit</button>
     </div>
 </form>
-</body>
-</html>
+<?php include(__DIR__ . '/../_footer.php'); ?>

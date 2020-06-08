@@ -1,6 +1,6 @@
 <?php
 
-session_start();
+include(__DIR__ . '/../bootstrap.php');
 
 // You shouldn't store passwords anywhere, but for testing purposes: the hash is made of the password "test"
 $users = [
@@ -20,19 +20,17 @@ if (isset($_POST['username'], $_POST['password'])) {
             // Remember the username of the user who just logged in
             $_SESSION['authenticated_user'] = $_POST['username'];
 
-            // Redirect to /secret.php
-            header('Location: /secret.php');
+            // Redirect to /secret
+            header('Location: /secret');
             exit;
         }
     }
 }
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Login</title>
-</head>
-<body>
+<?php
+$title = 'Login';
+include(__DIR__ . '/../_header.php');
+?>
 <form method="post">
     <div>
         <label for="username">
@@ -50,5 +48,5 @@ if (isset($_POST['username'], $_POST['password'])) {
         <button type="submit">Submit</button>
     </div>
 </form>
-</body>
-</html>
+<?php
+include(__DIR__ . '/../_footer.php');
