@@ -6,7 +6,12 @@
 <body>
 <h1>Your lucky number is: <?php echo $randomInt; ?></h1>
 <?php if ($randomInt > 5) { ?>
-    <h2>Nice!</h2>
+    <h2>Nice<?php
+    if (isset($_COOKIE['name'])) {
+        echo ', '
+            . htmlspecialchars($_COOKIE['name'], ENT_QUOTES);
+    }
+    ?>!</h2>
 <?php } ?>
 <p>
     <a href="/pictures.php?number=<?php echo $randomInt; ?>">
