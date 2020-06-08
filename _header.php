@@ -26,6 +26,9 @@ $title = $title ?? 'PHP for the Web';
             <li class="nav-item">
                 <a class="nav-link" href="/secret">Secret picture</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/list-tours">List tours</a>
+            </li>
             <?php
             if (isset($_SESSION['authenticated_user'])) {
                 ?>
