@@ -1,6 +1,11 @@
 <?php
+session_start();
+
 if (isset($_POST['name'])) {
-    setcookie('name', $_POST['name']);
+    $_SESSION['name'] = $_POST['name'];
+
+    $_SESSION['message'] = 'Thanks for telling us your name!';
+
     header('Location: /random.php');
     exit;
 }

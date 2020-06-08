@@ -4,6 +4,7 @@
     <title>Kittens</title>
 </head>
 <body>
+<?php include __DIR__ . '/../_flash_message.php'; ?>
 <?php
 
 $numberOfPictures = isset($_GET['number']) ? (int)$_GET['number'] : 1;
