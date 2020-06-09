@@ -4,6 +4,7 @@ $urlMap = [
     '/list-tours' => 'list-tours.php',
     '/edit-tour' => 'edit-tour.php',
     '/delete-tour' => 'delete-tour.php',
+    '/tour' => 'tour.php',
     '/login' => 'login.php',
     '/logout' => 'logout.php',
     '/name' => 'name.php',

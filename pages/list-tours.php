@@ -43,10 +43,15 @@ else {
             ?>
             <tr>
                 <td>
-                    <?php echo htmlspecialchars(
-                        $tourData['destination'],
+                    <a href="/tour?id=<?php echo htmlspecialchars(
+                        $tourData['id'],
                         ENT_QUOTES
-                    ); ?>
+                    ); ?>">
+                        <?php echo htmlspecialchars(
+                            $tourData['destination'],
+                            ENT_QUOTES
+                        ); ?>
+                    </a>
                 </td>
                 <td>
                     <?php echo htmlspecialchars(

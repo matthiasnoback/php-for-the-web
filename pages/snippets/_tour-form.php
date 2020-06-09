@@ -1,4 +1,4 @@
-<form method="post">
+<form enctype="multipart/form-data" method="post">
     <div>
         <label for="destination">
             Destination:
@@ -49,6 +49,30 @@
             ?>>
             Is accessible
         </label>
+    </div>
+    <div>
+        <label for="picture">
+            Picture:
+        </label>
+        <?php
+        if (isset($normalizedData['picture'])) {
+            ?>
+            <a href="/uploads/<?php
+                echo htmlspecialchars($normalizedData['picture'], ENT_QUOTES);
+            ?>">Current picture</a>
+            <?php
+        }
+        ?>
+        <input type="file" id="picture" name="picture">
+        <?php
+        if (isset($formErrors['picture'])) {
+            ?>
+            <strong>
+                <?php echo $formErrors['picture']; ?>
+            </strong>
+            <?php
+        }
+        ?>
     </div>
     <div>
         <button type="submit">Save</button>

@@ -8,7 +8,7 @@ include(__DIR__ . '/../bootstrap.php');
 $formErrors = [];
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Step 1: normalize the request data:
-    $normalizedData = normalize_submitted_data($_POST);
+    $normalizedData = normalize_submitted_data($_POST, $_FILES);
 
     // Step 2: validate the normalized data
     $formErrors = validate_normalized_data($normalizedData);
@@ -19,6 +19,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Provide a unique ID for this new tour:
         $normalizedData['id'] = count($toursData) + 1;
+
+        $normalizedData = process_image_upload($normalizedData);
 
         $toursData[] = $normalizedData;
 

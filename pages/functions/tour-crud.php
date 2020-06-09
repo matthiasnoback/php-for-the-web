@@ -1,7 +1,7 @@
 <?php
-function normalize_submitted_data(array $submittedData): array
+function normalize_submitted_data(array $submittedData, array $files): array
 {
-    return [
+    $normalizedData = [
         'destination' =>
             isset($submittedData['destination'])
                 ? (string)$submittedData['destination']
@@ -15,6 +15,15 @@ function normalize_submitted_data(array $submittedData): array
                 ? true
                 : false
     ];
+
+    if (
+        isset($files['picture']['error'])
+        && $files['picture']['error'] === UPLOAD_ERR_OK
+    ) {
+        $normalizedData['picture'] = $files['picture']['tmp_name'];
+    }
+
+    return $normalizedData;
 }
 
 function validate_normalized_data(array $normalizedData): array
@@ -28,6 +37,16 @@ function validate_normalized_data(array $normalizedData): array
     if ($normalizedData['number_of_tickets_available'] < 1) {
         $formErrors['number_of_tickets_available'] =
             'Number of tickets available should be at least 1';
+    }
+
+    if (!isset($normalizedData['picture'])) {
+        $formErrors['picture'] = 'Please upload a picture';
+    } elseif (is_uploaded_file($normalizedData['picture'])) {
+        $finfo = new finfo(FILEINFO_MIME_TYPE);
+        $mimeType = $finfo->file($normalizedData['picture']);
+        if ($mimeType !== 'image/jpeg') {
+            $formErrors['picture'] = 'Please provide a JPG image';
+        }
     }
 
     return $formErrors;
@@ -91,4 +110,20 @@ function delete_tour(int $id): void
     }
 
     save_all_tours($toursData);
+}
+
+function process_image_upload(array $normalizedData): array
+{
+    if (is_uploaded_file($normalizedData['picture'])) {
+        $filename = 'tour-' . $normalizedData['id'] . '.jpg';
+        $picturePath = __DIR__ . '/../../public/uploads/' . $filename;
+
+        // Move the uploaded file to `public/uploads/`:
+        move_uploaded_file($_FILES['picture']['tmp_name'], $picturePath);
+
+        // Set the filename so it will be saved too:
+        $normalizedData['picture'] = $filename;
+    }
+
+    return $normalizedData;
 }
