@@ -1,7 +1,5 @@
 <?php
 
-include(__DIR__ . '/../bootstrap.php');
-
 $numberOfPictures = isset($_GET['number']) ? (int)$_GET['number'] : 1;
 if ($numberOfPictures < 1) {
     $numberOfPictures = 1;

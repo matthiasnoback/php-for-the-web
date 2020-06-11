@@ -1,6 +1,4 @@
 <?php
-include(__DIR__ . '/../bootstrap.php');
-
 $title = 'Page not found';
 include(__DIR__ . '/../_header.php');
 ?>

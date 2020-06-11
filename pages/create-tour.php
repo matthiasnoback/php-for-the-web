@@ -2,8 +2,6 @@
 
 include(__DIR__ . '/functions/tour-crud.php');
 
-include(__DIR__ . '/../bootstrap.php');
-
 // If the request method is POST, then use the submitted to save the new tour:
 $formErrors = [];
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

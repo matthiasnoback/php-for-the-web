@@ -1,7 +1,5 @@
 <?php
 
-include(__DIR__ . '/../bootstrap.php');
-
 $randomInt = random_int(1, 10);
 
 $title = 'Random';

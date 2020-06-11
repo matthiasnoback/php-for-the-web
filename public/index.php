@@ -1,5 +1,8 @@
 <?php
+include(__DIR__ . '/../bootstrap.php');
+
 $urlMap = [
+    '/oops' => 'oops.php',
     '/create-tour' => 'create-tour.php',
     '/list-tours' => 'list-tours.php',
     '/edit-tour' => 'edit-tour.php',

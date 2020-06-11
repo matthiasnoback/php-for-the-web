@@ -1,7 +1,5 @@
 <?php
 
-include(__DIR__ . '/../bootstrap.php');
-
 // You shouldn't store passwords anywhere, but for testing purposes: the hash is made of the password "test"
 $users = [
     'matthias' => '$2y$10$1sXx3dPquOicIl53Y7XRdOqyS4P6flYXXpxHpTC83ZnusdxpEPtXe'

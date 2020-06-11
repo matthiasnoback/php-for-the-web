@@ -1,7 +1,5 @@
 <?php
 
-include(__DIR__ . '/../bootstrap.php');
-
 if (isset($_POST['name'])) {
     $_SESSION['name'] = $_POST['name'];
 
