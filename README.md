@@ -37,3 +37,11 @@ To stop the webserver:
 ```bash
 bin/stop_server
 ```
+
+## Challenges
+
+To start the projects of the challenges:
+
+```bash
+bin/start_server challenge_chapter_04 
+```

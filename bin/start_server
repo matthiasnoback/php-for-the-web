@@ -1,3 +1,5 @@
 #!/usr/bin/env bash
 
-docker-compose up -d webserver
+service=${1-webserver}
+
+docker-compose up -d "${service}"
