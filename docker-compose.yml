@@ -6,8 +6,17 @@ services:
     volumes:
       - ./:/app
     working_dir: /app
+
   php:
     image: php:7.4-cli-alpine
     volumes:
       - ./:/app
     working_dir: /app
+
+  webserver:
+    image: matthiasnoback/php-for-the-web-webserver
+    build: docker/webserver/
+    volumes:
+      - ./:/app
+    ports:
+      - "8000:8000"

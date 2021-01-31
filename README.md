@@ -20,6 +20,20 @@ This will install the required PHP dependencies in `vendor/`.
 
 Finally, run:
 
-```
+```bash
 bin/run_tests
+```
+
+If you want to look at the website itself:
+
+```bash
+bin/start_server
+```
+
+Then go to <http://localhost:8000>
+
+To stop the webserver:
+
+```bash
+bin/stop_server
 ```
