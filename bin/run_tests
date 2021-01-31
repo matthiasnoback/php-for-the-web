@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+docker-compose run --rm composer install --prefer-dist --no-progress --ignore-platform-reqs
+docker-compose run --rm php vendor/bin/phpunit
