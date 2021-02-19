@@ -36,3 +36,19 @@ services:
     ports:
       - "8002:8000"
     command: challenge_chapter_07/public/
+
+  challenge_chapter_08:
+    image: matthiasnoback/php-for-the-web-webserver
+    volumes:
+      - ./:/app
+    ports:
+      - "8003:8000"
+    command: challenge_chapter_08/public/
+
+  challenge_chapter_09:
+    image: matthiasnoback/php-for-the-web-webserver
+    volumes:
+      - ./:/app
+    ports:
+      - "8004:8000"
+    command: challenge_chapter_09/public/

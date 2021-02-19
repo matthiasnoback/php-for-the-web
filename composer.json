@@ -4,5 +4,8 @@
         "symfony/panther": "^0.7.1",
         "symfony/css-selector": "^5.1",
         "symfony/mime": "^5.1"
-    }
+    },
+  "require": {
+    "ext-json": "*"
+  }
 }
