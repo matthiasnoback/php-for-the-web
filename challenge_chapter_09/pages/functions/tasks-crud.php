@@ -40,3 +40,42 @@ function save_all_tasks(array $tasksData): void
 
     file_put_contents($tasksJsonFile, $jsonData);
 }
+
+function load_task_data(int $id): array
+{
+    $tasksData = load_all_tasks_data();
+
+    foreach ($tasksData as $taskData) {
+        if ($taskData['id'] === $id) {
+            return $taskData;
+        }
+    }
+
+    throw new RuntimeException('Could not find task with ID ' . $id);
+}
+
+function save_task_data(array $modifiedTaskData): void
+{
+    $tasksData = load_all_tasks_data();
+
+    foreach ($tasksData as $key => $taskData) {
+        if ($taskData['id'] === $modifiedTaskData['id']) {
+            $tasksData[$key] = $modifiedTaskData;
+        }
+    }
+
+    save_all_tasks($tasksData);
+}
+
+function delete_task(int $id): void
+{
+    $tasksData = load_all_tasks_data();
+
+    foreach ($tasksData as $key => $taskData) {
+        if ($taskData['id'] === $id) {
+            $tasksData[$key]['is_deleted'] = true;
+        }
+    }
+
+    save_all_tasks($tasksData);
+}

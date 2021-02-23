@@ -82,6 +82,32 @@ final class ChallengeChapter09Test extends TestCase
     /**
      * @test
      */
+    public function you_can_edit_a_task(): void
+    {
+        $this->login();
+
+        $task = 'Build some Lego';
+        $this->createTask($task);
+
+        $response = $this->client->clickLink('Edit');
+
+        self::assertEquals($task, $response->filter('input#task')->attr('value'));
+
+        $newTask = 'Buy some Lego';
+
+        $this->client->submitForm(
+            'Save',
+            [
+                'task' => $newTask
+            ]
+        );
+
+        self::assertTrue($this->currentUserHasTask($newTask));
+    }
+
+    /**
+     * @test
+     */
     public function you_can_not_provide_an_empty_string_as_a_task(): void
     {
         $this->login();
@@ -109,6 +135,61 @@ final class ChallengeChapter09Test extends TestCase
         self::assertFalse($this->currentUserHasTask($task));
     }
 
+    /**
+     * @test
+     */
+    public function you_can_not_edit_the_task_of_another_user(): void
+    {
+        $this->loginAs('matthias');
+
+        $task = 'Build some Lego';
+        $this->createTask($task);
+
+        $this->loginAs('tomas');
+
+        // Task 1 will be owned by matthias, but tomas is the logged in user
+        $response = $this->client->request('GET', self::$baseUri . '/edit-task?id=1');
+
+        self::assertStringContainsString('You can not edit a task created by another user', $response->text());
+    }
+
+    /**
+     * @test
+     */
+    public function you_can_mark_a_task_as_done_and_it_disappears_from_the_list(): void
+    {
+        $this->loginAs('matthias');
+
+        $task = 'Build some Lego';
+        $this->createTask($task);
+
+        $this->client->submitForm('Done');
+
+        self::assertFalse($this->currentUserHasTask($task));
+    }
+
+    /**
+     * @test
+     */
+    public function you_can_not_mark_the_task_of_another_user_as_done(): void
+    {
+        $this->loginAs('matthias');
+
+        $task = 'Build some Lego';
+        $this->createTask($task);
+
+        $this->loginAs('tomas');
+
+        // Task 1 will be owned by matthias, but tomas is the logged in user
+        $response = $this->client->request('POST', self::$baseUri . '/mark-as-done', ['id' => '1']);
+
+        self::assertStringContainsString('You can not mark a task created by another user as done', $response->text());
+
+        $this->loginAs('matthias');
+
+        self::assertTrue($this->currentUserHasTask($task));
+    }
+
     private function login(): void
     {
         $this->loginAs('matthias');
@@ -132,7 +213,7 @@ final class ChallengeChapter09Test extends TestCase
         $this->client->request('GET', self::$baseUri . '/create-task');
 
         return $this->client->submitForm(
-            'Create',
+            'Save',
             [
                 'task' => $task
             ]
